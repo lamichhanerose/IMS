@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<section>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body border border-dark">
+            <h1 class="text-center">Reset Password</h1>
+            <form th:action="@{/changePassword}" method="post">
+              <div class="card">
+                <div class="card-body">
+                  <table id="user-table" class="table">
+                    <thead class="thead-light">
+                    <tr id="verification-row">
+                      <th>Verification Code</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                      <td th:text="${user.verificationCode}"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group">
+                <label for="email">Email</label>:
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter Your Email" required>
+              </div>
+              <div class="form-group">
+                <label for="password">New Password:</label>
+                <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Enter your new password" required>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control mb-3" placeholder="Confirm your new password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Reset Password</button>
+            </form>
+
+            <div th:if="${error}" class="text-danger mt-3">
+              <p th:text="${error}"></p>
+            </div>
+            <div th:if="${success}" class="text-success mt-3">
+              <p th:text="${success}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

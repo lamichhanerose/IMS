@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management System - Report</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">Inventory Management System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" th:href="@{/logout}">Logout</a>
+          <a class="dropdown-item" href="#" th:href="resetPassword">ChangePassword</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+</nav>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-3 p-0">
+      <div class="bg-dark text-white position-fixed" style="height: 100vh; width: 250px; overflow-y: auto;">
+        <div class="p-4">
+          <h2><i class="fas fa-book"></i> IMS</h2>
+        </div>
+        <nav class="navbar navbar-expand-md">
+          <ul class="navbar-nav flex-md-column">
+            <li class="nav-item">
+              <a class="nav-link" href="home"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sales"><i class="fas fa-info-circle"></i> Sales</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="orders"><i class="fas fa-book-open"></i> Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="list"><i class="fas fa-users"></i> Employees</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reports"><i class="fas fa-comments"></i>  Reports</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact"><i class="fas fa-paper-plane"></i> Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+
+    <div class="col-md-9 mt-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Sales Report</h5>
+          <div class="row">
+            <div class="col-md-12">
+          <div class="chart-container" style="position: relative; height: 300px;">
+            <canvas id="salesChart"></canvas>
+          </div>
+        </div>
+      </div>
+          <div class="card">
+            <div class="card-body bg-light">
+              <h5 class="card-title">Most Sold Products</h5>
+              <p><strong>Mamaearth:</strong> Mamaearth is a popular brand known for its natural and organic skincare and haircare products. Their range includes products for babies, moms, and men, focusing on gentle and safe ingredients.</p>
+              <p><strong>Nivea:</strong> Nivea is a well-established skincare brand offering a wide range of products, including moisturizers, lip balms, body lotions, and more. Known for their quality and effectiveness, Nivea products are trusted by millions worldwide.</p>
+              <p><strong>Simple:</strong> Simple is a skincare brand that focuses on gentle and minimalistic formulations. Their products are free from harsh chemicals, artificial fragrances, and colors, making them suitable for sensitive skin types.</p>
+            </div>
+          </div>
+
+          <br>
+      <br>
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Other Reports
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              Reports are formal documents which can include headings, sub-headings, numbered sections, bullet point text, and graphics such as flow charts, diagrams or graphs. All of these devices may be used to help the reader navigate the report and understand its content.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Additional Content
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              A report is a document that presents information in an organized format for a specific audience and purpose. Although summaries of reports may be delivered orally, complete reports are almost always in the form of written documents.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Chart data
+  var salesData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [{
+      label: 'Sales',
+      data: [100, 200, 150, 300, 250, 200],
+      borderColor: 'rgba(54, 162, 235, 1)',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderWidth: 2
+    }]
+  };
+
+  // Chart options
+  var salesOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  };
+
+  // Create the line chart
+  var salesChart = new Chart(document.getElementById('salesChart'), {
+    type: 'line',
+    data: salesData,
+    options: salesOptions
+  });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

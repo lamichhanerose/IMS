@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="create-employees-table1" author="rose">
+    <createTable tableName="employees">
+      <column name="id" type="bigint">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="VARCHAR(50)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="email" type="VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="department" type="VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="salary" type="BIGINT">
+        <constraints nullable="true"/>
+      </column>
+      <column name="contribution" type="BIGINT">
+        <constraints nullable="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+
+  <changeSet id="create-orders-table-20230704" author="rose">
+    <sqlFile path="../sql/order.sql" relativeToChangelogFile="true"/>
+  </changeSet>
+
+  <changeSet id="roles2-20230704" author="rose">
+    <insert tableName="roles">
+      <column name="name">ADMIN</column>
+    </insert>
+    <insert tableName="roles">
+      <column name="name">USER</column>
+    </insert>
+  </changeSet>
+
+</databaseChangeLog>
